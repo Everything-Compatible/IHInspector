@@ -1,0 +1,6 @@
+[submodule "YRpp"]
+	path = YRpp
+	url = https://github.com/Everything-Compatible/YRpp
+[submodule "ECSDK"]
+	path = ECSDK
+	url = https://github.com/Everything-Compatible/EC-SDK
