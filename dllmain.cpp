@@ -1,5 +1,6 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include <Windows.h>
+#include <EC.h>
 
 extern "C" __declspec(dllexport) void SyringeForceLoad()
 {
@@ -14,6 +15,20 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
+        ECInitLibrary(
+            "IHInspector",
+            1,
+            1,
+            u8"IH Game Object Inspector Library",
+            []() {
+
+            },
+            []() {
+
+            },
+            {}
+        );
+        break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
