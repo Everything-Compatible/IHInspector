@@ -19,6 +19,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Patch">
+      <UniqueIdentifier>{ee95d804-f43e-4d75-ba5b-b28130aee556}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -30,16 +33,7 @@
     <ClCompile Include="ECSDK\EC.cpp">
       <Filter>ECSDK</Filter>
     </ClCompile>
-    <ClCompile Include="ECSDK\EC.GameClass.cpp">
-      <Filter>ECSDK</Filter>
-    </ClCompile>
-    <ClCompile Include="ECSDK\EC.LoadSave.cpp">
-      <Filter>ECSDK</Filter>
-    </ClCompile>
     <ClCompile Include="ECSDK\EC.Misc.cpp">
-      <Filter>ECSDK</Filter>
-    </ClCompile>
-    <ClCompile Include="ECSDK\EC.ObjBase.cpp">
       <Filter>ECSDK</Filter>
     </ClCompile>
     <ClCompile Include="ECSDK\ExtJson.cpp">
@@ -71,6 +65,30 @@
     </ClCompile>
     <ClCompile Include="ECSDK\ThirdParty\cJSON\cJSON.c">
       <Filter>ECSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECInitiaize.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector.Init.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Patch\Debug.cpp">
+      <Filter>Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="Patch\DynamicPatch.cpp">
+      <Filter>Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector.Access.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IH.Inspect.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InspectImpl.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspect.Output.cpp">
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -825,6 +843,21 @@
     </ClInclude>
     <ClInclude Include="ECSDK\ThirdParty\cJSON\cJSON.h">
       <Filter>ECSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Inspector.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IH.Inspect.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch\Debug.h">
+      <Filter>Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch\DynamicPatch.h">
+      <Filter>Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InspectImpl.h">
+      <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

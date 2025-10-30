@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)ECSDK;$(SolutionDir)YRpp;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)ECSDK;$(SolutionDir)Patch;$(SolutionDir)YRpp;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -94,11 +94,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;IHINSPECTOR_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>IHINSPECTOR;EC_NoObjBase;NOMINMAX; _CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;IHINSPECTOR_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp23</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,10 +146,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="ECSDK\EC.cpp" />
-    <ClCompile Include="ECSDK\EC.GameClass.cpp" />
-    <ClCompile Include="ECSDK\EC.LoadSave.cpp" />
     <ClCompile Include="ECSDK\EC.Misc.cpp" />
-    <ClCompile Include="ECSDK\EC.ObjBase.cpp" />
     <ClCompile Include="ECSDK\ExtJson.cpp" />
     <ClCompile Include="ECSDK\IH.Ext.cpp" />
     <ClCompile Include="ECSDK\IH.File.cpp" />
@@ -159,6 +157,14 @@
     <ClCompile Include="ECSDK\WIC.Buff.cpp" />
     <ClCompile Include="ECSDK\WIC.Define.cpp" />
     <ClCompile Include="ECSDK\WIC.Interface.cpp" />
+    <ClCompile Include="Patch\Debug.cpp" />
+    <ClCompile Include="Patch\DynamicPatch.cpp" />
+    <ClCompile Include="src\ECInitiaize.cpp" />
+    <ClCompile Include="src\IH.Inspect.cpp" />
+    <ClCompile Include="src\Inspect.Output.cpp" />
+    <ClCompile Include="src\InspectImpl.cpp" />
+    <ClCompile Include="src\Inspector.Access.cpp" />
+    <ClCompile Include="src\Inspector.Init.cpp" />
     <ClCompile Include="YRpp\StaticInits.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +199,11 @@
     <ClInclude Include="ECSDK\WIC.h" />
     <ClInclude Include="ECSDK\WIC.Interface.h" />
     <ClInclude Include="ECSDK\WIC.Template.h" />
+    <ClInclude Include="Patch\Debug.h" />
+    <ClInclude Include="Patch\DynamicPatch.h" />
+    <ClInclude Include="src\IH.Inspect.h" />
+    <ClInclude Include="src\InspectImpl.h" />
+    <ClInclude Include="src\Inspector.h" />
     <ClInclude Include="YRpp\AbstractClass.h" />
     <ClInclude Include="YRpp\AbstractTypeClass.h" />
     <ClInclude Include="YRpp\AircraftClass.h" />
