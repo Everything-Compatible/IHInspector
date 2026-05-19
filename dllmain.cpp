@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <EC.h>
 #include "src/IH.Inspect.h"
+#include "src/Inspector.Provider.h"
 
 extern "C" __declspec(dllexport) void SyringeForceLoad()
 {
@@ -18,7 +19,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        ECInitLibrary(
+        if (ECInitLibrary(
             IHInspectorLibName,
             IHInspectorVersion,
             IHInspectorVersion,
@@ -31,10 +32,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             },
             {
                 {"Type", FuncInfo{IHInspect_Type, FuncType::Action}},
-				{"View", FuncInfo{IHInspect_View, FuncType::Action}},
+                {"View", FuncInfo{IHInspect_View, FuncType::Action}},
             },
             {}
-        );
+            ))
+        {
+            InitialRequest(RegisterFunction, "EC::RegisterAddressCommentProvider", "IHInspector", InspectorACP);
+        }
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:

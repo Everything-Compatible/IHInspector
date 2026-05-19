@@ -99,6 +99,9 @@
     <ClCompile Include="src\Inspector.Var.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Inspector.Provider.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore">
@@ -869,6 +872,9 @@
       <Filter>Src</Filter>
     </ClInclude>
     <ClInclude Include="src\Misc.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Inspector.Provider.h">
       <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>
