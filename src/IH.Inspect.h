@@ -65,7 +65,12 @@ PArray<ObjectReference> __cdecl GetTraitObjects(ObjectReference ObjRef, UTF8_CSt
 	-Address	地址
 2.
 	-Path		路径元素列表（可选）
-	-Trait		特性名列表（可选）
+	-Trait		Default/Both/Full/None :
+		Default : 默认的显示模式，次要的Trait不会起作用，隐藏原始成员会生效
+		Both : 次要的Trait不会起作用, 总是显示原始成员
+		Full : 显示所有可用的Trait信息, 总是显示原始成员
+		None : 不使用Trait, 只显示原始成员
+	-Depth		显示深度，默认-1（无限制）
 
 */
 void IHInspect_View(JsonObject Args);

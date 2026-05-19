@@ -90,6 +90,15 @@
     <ClCompile Include="src\Inspect.Output.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Misc.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector.Tags.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector.Var.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore">
@@ -857,6 +866,9 @@
       <Filter>Patch</Filter>
     </ClInclude>
     <ClInclude Include="src\InspectImpl.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Misc.h">
       <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,7 +30,8 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
             },
             {
-                {"Type", FuncInfo{IHInspect_Type, FuncType::Action}}
+                {"Type", FuncInfo{IHInspect_Type, FuncType::Action}},
+				{"View", FuncInfo{IHInspect_View, FuncType::Action}},
             },
             {}
         );

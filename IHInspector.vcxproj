@@ -165,6 +165,9 @@
     <ClCompile Include="src\InspectImpl.cpp" />
     <ClCompile Include="src\Inspector.Access.cpp" />
     <ClCompile Include="src\Inspector.Init.cpp" />
+    <ClCompile Include="src\Inspector.Tags.cpp" />
+    <ClCompile Include="src\Inspector.Var.cpp" />
+    <ClCompile Include="src\Misc.cpp" />
     <ClCompile Include="YRpp\StaticInits.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +207,7 @@
     <ClInclude Include="src\IH.Inspect.h" />
     <ClInclude Include="src\InspectImpl.h" />
     <ClInclude Include="src\Inspector.h" />
+    <ClInclude Include="src\Misc.h" />
     <ClInclude Include="YRpp\AbstractClass.h" />
     <ClInclude Include="YRpp\AbstractTypeClass.h" />
     <ClInclude Include="YRpp\AircraftClass.h" />

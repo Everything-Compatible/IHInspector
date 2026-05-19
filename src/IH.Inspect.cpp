@@ -8,6 +8,10 @@ void IHInspect_Type(JsonObject Args)
 	IHInspect_Type_Impl(Args);
 }
 
+void IHInspect_View(JsonObject Args)
+{
+	IHInspect_View_Impl(Args);
+}
 
 #else
 
@@ -16,6 +20,11 @@ void IHInspect_Type(JsonObject Args)
 void IHInspect_Type(JsonObject Args)
 {
 	ECDispatch(IHInspect_Type, IHInspectorLibName, "Type", IHInspectorVersion)(Args);
+}
+
+void IHInspect_View(JsonObject Args)
+{
+	ECDispatch(IHInspect_View, IHInspectorLibName, "View", IHInspectorVersion)(Args);
 }
 
 #endif // IHINSPECTOR
