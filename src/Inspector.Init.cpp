@@ -874,6 +874,66 @@ void InitTypeMetaInfo()
 			//std::println("\033[37m[Inspector]\033[1;33m Type \"{}\" is pending definition.\033[0m", TypeName);
 		}
 	}
+
+
+	// Init Predefined Variables
+	// from ./Inspector/Vars/*.json
+	std::filesystem::path predefVar = std::filesystem::current_path() / "Inspector" / "Vars";
+	if (std::filesystem::exists(predefVar) && std::filesystem::is_directory(predefVar))
+	{
+		for (const auto& entry : std::filesystem::directory_iterator(predefVar))
+		{
+			if (entry.is_regular_file() && entry.path().extension() == ".json")
+			{
+				JsonFile jsonFile;
+				auto ErrorStr = jsonFile.ParseChecked(~ReadFileToString(entry.path().string().c_str()), "<SYNTAX ERROR>");
+
+				if (!ErrorStr.empty())
+				{
+					Debug::LogFormat("[Inspector] Failed to read file \"{}\", Error:\n{}\n", entry.path().string(), ErrorStr);
+				}
+
+				if (jsonFile.Available())
+				{
+					for (auto& [Name, Obj] : jsonFile.GetObj().GetMapObject())
+					{
+						auto oName = Obj.GetObjectItem("type");
+						auto oAddress = Obj.GetObjectItem("address");
+
+						if (oName && oAddress && oName.IsTypeString() && oAddress.IsTypeString())
+						{
+							//Address : Hex String, e.g. "0x12345678"
+
+							DWORD Address = static_cast<DWORD>(std::strtoull(oAddress.GetString().c_str(), nullptr, 16));
+							std::string typeName = oName.GetString();
+
+							auto pMeta = GetOrUnpackTypeMetaInfo(typeName);
+
+							if (!pMeta)
+							{
+								Debug::LogFormat("[Inspector] Failed to load Type Meta Info of Predefined Variable \"{}\" with type \"{}\"\n", Name, typeName);
+							}
+							else
+							{
+
+								ObjectInstance inst;
+
+								inst.Address = Address;
+								inst.TypeInfo = pMeta;
+
+								AddPresetObjectInstance(Name, inst);
+							}
+						}
+						else
+						{
+							Debug::LogFormat("[Inspector] Failed to load Predefined Variable \"{}\" : Invalid format.\n", Name);
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
 
 

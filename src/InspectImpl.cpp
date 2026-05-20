@@ -2,6 +2,7 @@
 #include "Inspector.h"
 #include <format>
 #include <iostream>
+#include "Debug.h"
 
 /*
 命令： IHInspect.View
@@ -50,6 +51,11 @@ void IHInspect_View_Impl(JsonObject Args)
 	}
 
 	//4. View
+	Debug::LogFormat("[Inspector] META info {}\n",
+		(void*)instance.TypeInfo.get());
+	Debug::LogFormat("[Inspector] Viewing instance of type {} at address 0x{:08X} with depth {} and ShowID {}\n",
+		instance.TypeInfo->typeName, instance.Address, depth, showID);
+
 	JsonFile result = ViewAsObject(instance, showID, depth);
 	ECDebug::DoNotEcho();
 	std::cout << result.GetObj().GetTextEx();
@@ -76,11 +82,11 @@ bool AnalyzeInstanceFromViewArgs(JsonObject Args, ObjectInstance& Inst)
 		ObjectInstanceVar var;
 		var.VarName = oVarName.GetString();
 
-		auto Inst = GetVarInstance(var);
+		auto OptionalInst = GetVarInstance(var);
 
-		if (Inst)
+		if (OptionalInst)
 		{
-			Inst = *Inst;
+			Inst = *OptionalInst;
 			return true;
 		}
 		else

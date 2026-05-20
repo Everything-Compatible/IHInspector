@@ -449,6 +449,8 @@ void InitTypeMetaInfo();
 
 void AddObjectInstance(const std::string& VarName, ObjectInstance Instance);
 
+void AddPresetObjectInstance(const std::string& VarName, ObjectInstance Instance);
+
 ObjectTypeMetaTrait* GetTypeMetaTrait(const std::string& TraitName);
 
 
