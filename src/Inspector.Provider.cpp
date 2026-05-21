@@ -55,15 +55,27 @@ std::u8string GetFirstACPString()
 {
 	std::u8string S;
 	S += FirstACPString_Scenario();
-	S += u8"\n";
+	S += u8"\n    ";
 	S += FirstACPString_Frame();
 
 	//For debug
-	/*AddressCommentInfo as;
-	as.CanRead = true; as.CanExecute = false;
-	as.Addr = (DWORD)TechnoClass::Array[0];
-	S += u8"\nTechnoClass::Array[0] :";
-	S += ACPGetString(as);*/
+	//AddressCommentInfo as;
+	//volatile void* Obj[8]{};
+	//Obj[0] = (void*)0xDEADBEEF;
+	//Obj[1] = (void*)HouseClass::CurrentPlayer;
+	//Obj[2] = (void*)HouseClass::Observer;
+	//Obj[3] = (void*)(UnitClass::Array)[0];
+	//Obj[4] = (void*)(ObjectTypeClass::Array)[0];
+	//Obj[5] = (void*)(AbstractClass::Array)[0];
+	//Obj[6] = (void*)*((AbstractClass::Array).back());
+	//Obj[7] = (void*)(TriggerClass::Array)[0];
+	//as.CanRead = true; as.CanExecute = false;
+	//for(auto& ObjAddr : Obj)
+	//{
+	//	as.Addr = (DWORD)ObjAddr;
+	//	S += u8"\n    " + ~std::format("0x{:08X}", as.Addr);
+	//	S += u8"\n    " + ACPGetString(as);
+	//}
 
 	return S;
 }
@@ -116,6 +128,13 @@ void PushPresetInstanceFromYRPP()
 			AccessibleAbstractClass.insert(Obj);
 		}
 	}
+	for (auto& Obj : TriggerClass::Array)
+	{
+		if (IsReadable(hProc, Obj))
+		{
+			AccessibleAbstractClass.insert(Obj);
+		}
+	}
 	for (auto& Obj : AbstractTypeClass::Array)
 	{
 		if (IsReadable(hProc, Obj))
@@ -123,8 +142,11 @@ void PushPresetInstanceFromYRPP()
 			AccessibleAbstractTypeClass.insert(Obj);
 		}
 	}
+
 	Debug::LogFormat("[Inspector] Pushed {} accessible AbstractClass instances.\n", AccessibleAbstractClass.size());
 	Debug::LogFormat("[Inspector] Pushed {} accessible AbstractTypeClass instances.\n", AccessibleAbstractTypeClass.size());
+
+	AccessibleAbstractClass.insert(AccessibleAbstractTypeClass.begin(), AccessibleAbstractTypeClass.end());
 }
 
 std::u8string AbsObj_AbsType(AbstractTypeClass* pAbsType);
@@ -231,7 +253,7 @@ std::u8string AbsObjExt_Trigger(TriggerClass* pTrigger)
 		auto Next = pTrigger->NextTrigger;
 		auto Enabled = pTrigger->Enabled;
 		auto House = pTrigger->House;
-		return ~std::format("Trigger： Next = {} Enabled = {}\n    House : {}",
+		return ~std::format("Trigger:  Next = {} Enabled = {}\n    House : {}",
 			(void*)Next, Enabled ? "true" : "false", ~AbsObj_House(House));
 	}
 	else
@@ -249,7 +271,7 @@ std::u8string AbsObjExt_Event(EventClass* pEvent)
 		auto Frame = pEvent->Frame;
 		auto HouseIndex = (int)pEvent->HouseIndex;
 		auto pHouse = (HouseIndex > 0 && HouseIndex < HouseClass::Array.Count) ? HouseClass::Array[HouseIndex] : nullptr;
-		return ~std::format("Event： Type = {}, IsExecuted = {}, Frame = {}\n    House : {}",
+		return ~std::format("Event:  Type = {}, IsExecuted = {}, Frame = {}\n    House : {}",
 			(int)Type, IsExecuted ? "true" : "false", Frame, ~AbsObj_House(pHouse));
 	}
 	else
@@ -268,12 +290,12 @@ std::u8string AbsObjExt_Techno(TechnoClass* pTechno)
 		if (pType)
 		{
 			auto Strength = pType->Strength;
-			return ~std::format("Techno： HP = {}/{}, InLimbo = {}",
+			return ~std::format("Techno:  HP = {}/{}, InLimbo = {}",
 				Health, Strength, InLimbo ? "true" : "false");
 		}
 		else
 		{
-			return ~std::format("Techno： HP = {}/??, InLimbo = {}",
+			return ~std::format("Techno:  HP = {}/??, InLimbo = {}",
 				Health, InLimbo ? "true" : "false");
 		}
 	}
@@ -306,7 +328,7 @@ std::u8string ACPGetString(const AddressCommentInfo& AddrInfo)
 			auto pHouse = pAbs->GetOwningHouse();
 			if (pHouse)
 			{
-				BaseStr = BaseStr + u8"\n    所属作战方：" + AbsObj_House(pHouse);
+				BaseStr = BaseStr + u8"\n    所属作战方: " + AbsObj_House(pHouse);
 			}
 			break;
 		}
