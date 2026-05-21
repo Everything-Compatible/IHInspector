@@ -166,7 +166,7 @@ std::u8string AbsObj_AbsType(AbstractTypeClass* pAbsType)
 		auto pUIName = pAbsType->UIName;
 		std::string UINameU8;
 		if (pUIName && IsReadable(GetCurrentProcess(), pUIName))UINameU8 = UnicodetoUTF8(pUIName);
-		else UINameU8 = "<无法访问>";
+		else UINameU8 = "???";
 		return ~std::format("ID = {}, Name = {}, UIName = {}", pAbsType->get_ID(), pAbsType->Name, UINameU8);
 	}
 	else
@@ -231,7 +231,7 @@ std::u8string AbsObjExt_Trigger(TriggerClass* pTrigger)
 		auto Next = pTrigger->NextTrigger;
 		auto Enabled = pTrigger->Enabled;
 		auto House = pTrigger->House;
-		return ~std::format("触发信息： Next = {} Enabled = {}\n    House : {}",
+		return ~std::format("Trigger： Next = {} Enabled = {}\n    House : {}",
 			(void*)Next, Enabled ? "true" : "false", ~AbsObj_House(House));
 	}
 	else
@@ -249,7 +249,7 @@ std::u8string AbsObjExt_Event(EventClass* pEvent)
 		auto Frame = pEvent->Frame;
 		auto HouseIndex = (int)pEvent->HouseIndex;
 		auto pHouse = (HouseIndex > 0 && HouseIndex < HouseClass::Array.Count) ? HouseClass::Array[HouseIndex] : nullptr;
-		return ~std::format("事件信息： Type = {}, IsExecuted = {}, Frame = {}\n    House : {}",
+		return ~std::format("Event： Type = {}, IsExecuted = {}, Frame = {}\n    House : {}",
 			(int)Type, IsExecuted ? "true" : "false", Frame, ~AbsObj_House(pHouse));
 	}
 	else
@@ -268,12 +268,12 @@ std::u8string AbsObjExt_Techno(TechnoClass* pTechno)
 		if (pType)
 		{
 			auto Strength = pType->Strength;
-			return ~std::format("Techno信息： HP = {}/{}, InLimbo = {}",
+			return ~std::format("Techno： HP = {}/{}, InLimbo = {}",
 				Health, Strength, InLimbo ? "true" : "false");
 		}
 		else
 		{
-			return ~std::format("Techno信息： HP = {}/??, InLimbo = {}",
+			return ~std::format("Techno： HP = {}/??, InLimbo = {}",
 				Health, InLimbo ? "true" : "false");
 		}
 	}
